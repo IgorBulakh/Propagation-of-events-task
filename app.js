@@ -64,18 +64,24 @@ const galleryItems = [
   },
 ];
 
+// Создание и рендер разметки по массиву данных galleryItems из app.js и предоставленному шаблону.
+
 console.log(galleryItems);
 
 const galleryItemsRef = (galleryItems) => {
   const galleryRef = document.createElement("img");
-
   galleryRef.classList.add("gallery__image");
   galleryRef.src = galleryItems.preview;
-  galleryRef.alt = galleryItems.preview;
+  galleryRef.alt = galleryItems.description;
+
+  const linkRef = document.createElement("a");
+  linkRef.classList.add("gallery__link");
+  linkRef.src = galleryItems.original;
+  linkRef.appendChild(galleryRef);
 
   const itemRef = document.createElement("li");
-  itemRef.classList.add("list-js");
-  itemRef.appendChild(galleryRef);
+  itemRef.classList.add("gallery__item");
+  itemRef.appendChild(linkRef);
 
   return itemRef;
 };
