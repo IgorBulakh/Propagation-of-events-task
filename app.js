@@ -72,6 +72,7 @@ const galleryItemsRef = (galleryItems) => {
   const galleryRef = document.createElement("img");
   galleryRef.classList.add("gallery__image");
   galleryRef.src = galleryItems.preview;
+  // galleryRef.data.source = galleryItems.original;
   galleryRef.alt = galleryItems.description;
 
   const linkRef = document.createElement("a");
@@ -90,3 +91,15 @@ const imagesIcon = galleryItems.map((icon) => galleryItemsRef(icon));
 
 const listHtml = document.querySelector(".js-gallery");
 listHtml.append(...imagesIcon);
+
+// -----------------------
+
+const ulRef = {
+  tags: document.querySelector(".js-gallery"),
+};
+
+ulRef.tags.addEventListener("click", onTagsClick);
+
+function onTagsClick(even) {
+  console.log(even.target);
+}
