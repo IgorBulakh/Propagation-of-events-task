@@ -1,4 +1,5 @@
-const galleryItems = [
+// const galleryItems =
+export default [
   {
     preview:
       "https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg",
@@ -64,6 +65,8 @@ const galleryItems = [
   },
 ];
 
+/*
+
 // Создание и рендер разметки по массиву данных galleryItems из app.js и предоставленному шаблону.
 
 console.log(galleryItems);
@@ -71,13 +74,14 @@ console.log(galleryItems);
 const galleryItemsRef = (galleryItems) => {
   const galleryRef = document.createElement("img");
   galleryRef.classList.add("gallery__image");
+
   galleryRef.src = galleryItems.preview;
-  // galleryRef.data.source = galleryItems.original;
+  galleryRef.dataset.source = galleryItems.original;
   galleryRef.alt = galleryItems.description;
 
   const linkRef = document.createElement("a");
   linkRef.classList.add("gallery__link");
-  linkRef.src = galleryItems.original;
+  linkRef.href = galleryItems.original;
   linkRef.appendChild(galleryRef);
 
   const itemRef = document.createElement("li");
@@ -92,7 +96,7 @@ const imagesIcon = galleryItems.map((icon) => galleryItemsRef(icon));
 const listHtml = document.querySelector(".js-gallery");
 listHtml.append(...imagesIcon);
 
-// -----------------------
+// -------------------------------
 
 const ulRef = {
   tags: document.querySelector(".js-gallery"),
@@ -101,5 +105,18 @@ const ulRef = {
 ulRef.tags.addEventListener("click", onTagsClick);
 
 function onTagsClick(even) {
+  even.preventDefault();
   console.log(even.target);
+
+  if (even.target.nodeName !== "IMG") {
+    console.log("click no img");
+    return;
+  }
+  console.log("click");
+  if (even.target.nodeName === "IMG") {
+    let onOpen = document.querySelector("js-lightbox");
+    onOpen.classList.add("is-open");
+  }
 }
+
+*/
