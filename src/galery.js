@@ -63,9 +63,15 @@ function onTagsClick(even) {
     return;
   }
   if (even.target.nodeName === "IMG") {
-    refs.showModal.classList.add(".is-open");
+    refs.showModal.classList.add("is-open");
   }
 }
+
+// refs.galleryList.addEventListener("click", (even) => {
+//   if (even.target.nodeName === "IMG") {
+//     refs.showModal.classList.add(".is-open");
+//   }
+// });
 
 /*
 const ulRef = {
