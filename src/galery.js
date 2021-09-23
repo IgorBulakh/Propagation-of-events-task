@@ -60,11 +60,7 @@ refs.overlayBackdrop.addEventListener("click", onCloseOverlay);
 //=========open=======
 
 function onTagsClick(even) {
-  window.addEventListener("keydown", (even) => {
-    if (even.code === "Escape") {
-      onCloseButton();
-    }
-  });
+  window.addEventListener("keydown", onPresESCP);
   even.preventDefault();
   console.log(even.target);
 
@@ -87,6 +83,13 @@ function onCloseOverlay(even) {
   // even.preventDefault();
   if (even.target === even.currentTarget) {
     onCloseButton();
+  }
+}
+
+function onPresESCP(even) {
+  if (even.code === "Escape") {
+    onCloseButton();
+    console.log("pres Escape");
   }
 }
 
