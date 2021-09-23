@@ -5,6 +5,7 @@ import galleryItems from "./app.js";
 const refs = {
   galleryList: document.querySelector(".js-gallery"),
   showModal: document.querySelector(".js-lightbox"),
+  iconFull: document.querySelector(".lightbox__image"),
   closeButton: document.querySelector('[data-action="close-lightbox"]'),
   overlayBackdrop: document.querySelector(".lightbox__overlay"),
 };
@@ -23,6 +24,8 @@ const galleryGrid = (item, parent) => {
   parent.appendChild(imgRef);
 };
 */
+
+// Реализация делегирования на галерее ul.js-gallery и получение url большого изображения.
 //====================================================
 const galleryItemsRef = (item, galleryItems) => {
   const { preview, original, description } = item;
@@ -53,6 +56,9 @@ const listHtml = document.querySelector(".js-gallery");
 listHtml.append(...imagesIcon);
 
 // ==================================================
+
+// Открытие модального окна по клику на элементе галереи.
+
 refs.galleryList.addEventListener("click", onTagsClick);
 refs.closeButton.addEventListener("click", onCloseButton);
 refs.overlayBackdrop.addEventListener("click", onCloseOverlay);
@@ -67,21 +73,25 @@ function onTagsClick(even) {
   if (even.target.nodeName !== "IMG") {
     return;
   }
+
+  // Подмена значения атрибута src элемента img.lightbox__image.
   if (even.target.nodeName === "IMG") {
+    refs.iconFull.src = even.target.src;
+    refs.iconFull.alt = even.target.alt;
+
     refs.showModal.classList.add("is-open");
   }
 }
 
+// Закрытие модального окна по клику на кнопку button[data-action="close-lightbox"].
 // ========close=======
 
 function onCloseButton(even) {
-  // even.preventDefault();
   window.removeEventListener("keydown", onPresESCP);
   refs.showModal.classList.remove("is-open");
 }
 
 function onCloseOverlay(even) {
-  // even.preventDefault();
   if (even.target === even.currentTarget) {
     onCloseButton();
   }
@@ -94,17 +104,18 @@ function onPresESCP(even) {
   }
 }
 
-// refs.closeButton.addEventListener("click", (even) => {
-//   even.preventDefault();
-//   refs.showModal.classList.remove("is-open");
-// });
+/*
+refs.closeButton.addEventListener("click", (even) => {
+  even.preventDefault();
+  refs.showModal.classList.remove("is-open");
+});
 
-// refs.galleryList.addEventListener("click", (even) => {
-//   if (even.target.nodeName === "IMG") {
-//     refs.showModal.classList.add(".is-open");
-//   }
-// });
-
+refs.galleryList.addEventListener("click", (even) => {
+  if (even.target.nodeName === "IMG") {
+    refs.showModal.classList.add(".is-open");
+  }
+});
+*/
 /*
 const ulRef = {
   tags: document.querySelector(".js-gallery"),
