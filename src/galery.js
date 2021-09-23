@@ -6,6 +6,7 @@ const refs = {
   galleryList: document.querySelector(".js-gallery"),
   showModal: document.querySelector(".js-lightbox"),
   closeButton: document.querySelector('[data-action="close-lightbox"]'),
+  overlayBackdrop: document.querySelector(".lightbox__overlay"),
 };
 
 //===============================================
@@ -53,7 +54,10 @@ listHtml.append(...imagesIcon);
 
 // ==================================================
 refs.galleryList.addEventListener("click", onTagsClick);
-// refs.showModal.addEventListener("click", onTagsClick);
+refs.closeButton.addEventListener("click", onCloseButton);
+refs.overlayBackdrop.addEventListener("click", onCloseOverlay);
+
+//=========open=======
 
 function onTagsClick(even) {
   even.preventDefault();
@@ -66,6 +70,25 @@ function onTagsClick(even) {
     refs.showModal.classList.add("is-open");
   }
 }
+
+// ========close=======
+
+function onCloseButton(even) {
+  // even.preventDefault();
+  refs.showModal.classList.remove("is-open");
+}
+
+function onCloseOverlay(even) {
+  // even.preventDefault();
+  if (even.target === even.currentTarget) {
+    onCloseButton();
+  }
+}
+
+// refs.closeButton.addEventListener("click", (even) => {
+//   even.preventDefault();
+//   refs.showModal.classList.remove("is-open");
+// });
 
 // refs.galleryList.addEventListener("click", (even) => {
 //   if (even.target.nodeName === "IMG") {
