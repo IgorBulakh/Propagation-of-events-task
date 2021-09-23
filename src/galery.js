@@ -76,6 +76,7 @@ function onTagsClick(even) {
 
 function onCloseButton(even) {
   // even.preventDefault();
+  window.removeEventListener("keydown", onPresESCP);
   refs.showModal.classList.remove("is-open");
 }
 
