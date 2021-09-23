@@ -2,19 +2,41 @@ import galleryItems from "./app.js";
 
 // Создание и рендер разметки по массиву данных galleryItems из app.js и предоставленному шаблону.
 
-console.log(galleryItems);
+const refs = {
+  galleryList: document.querySelector(".js-gallery"),
+  showModal: document.querySelector(".js-lightbox"),
+  closeButton: document.querySelector('[data-action="close-lightbox"]'),
+};
 
-const galleryItemsRef = (galleryItems) => {
+//===============================================
+/*
+const galleryGrid = (item, parent) => {
+  const { preview, original, description } = item;
+  const imgRef = document.createElement("img");
+
+  imgRef.classList.add("gallery__image");
+  imgRef.dataset.source = original;
+  imgRef.src = preview;
+  imgRef.alt = description;
+
+  parent.appendChild(imgRef);
+};
+*/
+//====================================================
+const galleryItemsRef = (item, galleryItems) => {
+  const { preview, original, description } = item;
+
   const galleryRef = document.createElement("img");
-  galleryRef.classList.add("gallery__image");
 
-  galleryRef.src = galleryItems.preview;
-  galleryRef.dataset.source = galleryItems.original;
-  galleryRef.alt = galleryItems.description;
+  galleryRef.classList.add("gallery__image");
+  galleryRef.dataset.source = original;
+  galleryRef.src = preview;
+
+  galleryRef.alt = description;
 
   const linkRef = document.createElement("a");
   linkRef.classList.add("gallery__link");
-  linkRef.href = galleryItems.original;
+  linkRef.href = original;
   linkRef.appendChild(galleryRef);
 
   const itemRef = document.createElement("li");
@@ -29,8 +51,23 @@ const imagesIcon = galleryItems.map((icon) => galleryItemsRef(icon));
 const listHtml = document.querySelector(".js-gallery");
 listHtml.append(...imagesIcon);
 
-// -------------------------------
+// ==================================================
+refs.galleryList.addEventListener("click", onTagsClick);
+// refs.showModal.addEventListener("click", onTagsClick);
 
+function onTagsClick(even) {
+  even.preventDefault();
+  console.log(even.target);
+
+  if (even.target.nodeName !== "IMG") {
+    return;
+  }
+  if (even.target.nodeName === "IMG") {
+    refs.showModal.classList.add(".is-open");
+  }
+}
+
+/*
 const ulRef = {
   tags: document.querySelector(".js-gallery"),
 };
@@ -51,3 +88,4 @@ function onTagsClick(even) {
     onOpen.classList.add("is-open");
   }
 }
+*/
